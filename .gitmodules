@@ -1,9 +1,3 @@
 [submodule "private/config"]
 	path = private/config
 	url = https://github.com/sisyphus1212/codex-node-manager-public-config.git
-[submodule ".codex.private"]
-	path = .codex.private
-	url = https://github.com/sisyphus1212/codex-node-manager-codex-private.git
-[submodule ".codex.public"]
-	path = .codex.public
-	url = https://github.com/sisyphus1212/codex-node-manager-codex-public.git

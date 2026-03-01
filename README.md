@@ -447,19 +447,3 @@ systemctl is-active agent-node@2.service
 journalctl -u agent-manager.service -n 50 --no-pager
 ```
 
-## Codex Bundles
-
-Main repo includes two `.codex` subprojects:
-
-- `.codex.private` -> private runtime bundle
-- `.codex.public` -> redacted runtime bundle
-
-Usage:
-
-```bash
-# private deployment
-cp -a .codex.private/.codex "$HOME/.codex"
-
-# public template deployment
-cp -a .codex.public/.codex "$HOME/.codex"
-```
