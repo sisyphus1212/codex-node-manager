@@ -178,6 +178,16 @@ Node 鉴权 token 由 TG 管理命令维护：
 
 说明：token 是唯一鉴权依据；无需 `CODEX_ENFORCE_NODE_ALLOWLIST`。
 
+## 安全特性
+
+- Node 接入鉴权：Manager 仅接受携带有效 `node_token` 的 Node 注册。
+- TG 用户授权：支持 `TELEGRAM_ALLOWED_USER_IDS` 白名单控制机器人可用用户。
+- Token 生命周期管理：支持生成、查询、废除（`/token generate|list|revoke`）。
+- 配置分层隔离：公有仓只保留脱敏模板，真实敏感配置放在私有配置仓。
+- 发布脱敏约束：私有到公有同步流程要求脱敏检查，避免密钥/真实地址进入交付仓。
+- 最小化持久化：Manager 仅持久化路由和会话指针，不保存 Codex thread 具体内容。
+- 审批链路支持：`approval_policy=onRequest` 时审批请求可转发 Telegram，降低高危操作误执行风险。
+
 ### 3. 配置（Node）
 
 Node 运行在被控机器上（每台机器一个进程），至少需要：
