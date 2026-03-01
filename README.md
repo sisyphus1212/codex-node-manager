@@ -379,3 +379,70 @@ git submodule update --init --recursive
 ```
 
 说明：默认子模块指向公开模板仓。你拿走项目后，可把 `private/config` 的远程改成你自己的私有配置仓，再替换为你自己的真实字段。
+
+### 配置与部署流程（推荐）
+
+1. 拉取代码与子模块
+
+```bash
+git clone --recurse-submodules https://github.com/sisyphus1212/codex-node-manager.git
+cd codex-node-manager
+```
+
+2. 修改 `private/config` 里的模板为你的真实值
+
+- Manager:
+  - `private/config/manager/manager_config.json`
+- Node:
+  - `private/config/nodes/default/master/node_config.json`
+  - `private/config/nodes/default/void/node_config.json`
+- Ansible:
+  - `private/config/ansible/secrets.example.yml`（建议复制为 `secrets.yml` 再改）
+
+至少需要替换：
+
+- `telegram_bot_token`
+- `manager_ws`（如 `ws://<你的公网IP>:8765`）
+- `node_token`
+- `manager_control_token`
+- `telegram_startup_notify_chat_ids`（可空）
+
+3. 手工部署（systemd）
+
+```bash
+sudo mkdir -p /root/codex-node-manager
+sudo rsync -a --delete ./ /root/codex-node-manager/
+
+# manager config
+sudo install -m 0600 private/config/manager/manager_config.json /root/codex-node-manager/manager_config.json
+
+# node config（示例：master -> 实例1, void -> 实例2）
+sudo install -m 0600 private/config/nodes/default/master/node_config.json /root/codex-node-manager/node_config.1.json
+sudo install -m 0600 private/config/nodes/default/void/node_config.json /root/codex-node-manager/node_config.2.json
+
+sudo cp systemd/agent-manager.service /etc/systemd/system/agent-manager.service
+sudo cp systemd/agent-node@.service /etc/systemd/system/agent-node@.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now agent-manager.service
+sudo systemctl enable --now agent-node@1.service
+sudo systemctl enable --now agent-node@2.service
+```
+
+4. Ansible 部署（推荐）
+
+```bash
+# 从模板复制 secrets 文件
+cp private/config/ansible/secrets.example.yml private/config/ansible/secrets.yml
+# 编辑 secrets.yml 为真实值后执行
+ansible-playbook -i /root/ansible/inventory -l <host> ansible/deploy_cloud_huang.yml \
+  -e @private/config/ansible/secrets.yml
+```
+
+5. 校验
+
+```bash
+systemctl is-active agent-manager.service
+systemctl is-active agent-node@1.service
+systemctl is-active agent-node@2.service
+journalctl -u agent-manager.service -n 50 --no-pager
+```
