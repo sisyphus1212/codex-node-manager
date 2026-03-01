@@ -15,12 +15,12 @@ import asyncio, json, time
 from codex_stdio_client import CodexAppServerStdioProcess, CodexLocalAppServerConfig
 
 async def main():
-    app = CodexAppServerStdioProcess(CodexLocalAppServerConfig(codex_bin="codex", cwd="/root/telegram-bot"))
+    app = CodexAppServerStdioProcess(CodexLocalAppServerConfig(codex_bin="codex", cwd="/root/codex-node-manager"))
     await app.start()
     await app.ensure_started_and_initialized(client_name="verify_appserver_methods", version="0")
     try:
         t0=time.time()
-        r = await app.request("thread/start", {"cwd": "/root/telegram-bot", "sandbox": "workspace-write", "approvalPolicy": "on-request", "personality": "pragmatic"})
+        r = await app.request("thread/start", {"cwd": "/root/codex-node-manager", "sandbox": "workspace-write", "approvalPolicy": "on-request", "personality": "pragmatic"})
         tid = (r.get("thread") or {}).get("id")
         assert isinstance(tid, str) and tid, f"bad thread id: {r!r}"
 
@@ -33,7 +33,7 @@ async def main():
         r4 = await app.request("model/list", {"limit": 3})
         assert isinstance(r4.get("data"), list), r4
 
-        r5 = await app.request("skills/list", {"cwds": ["/root/telegram-bot"]})
+        r5 = await app.request("skills/list", {"cwds": ["/root/codex-node-manager"]})
         assert isinstance(r5, dict), r5
 
         dt=int((time.time()-t0)*1000)
@@ -43,4 +43,3 @@ async def main():
 
 asyncio.run(main())
 PY
-

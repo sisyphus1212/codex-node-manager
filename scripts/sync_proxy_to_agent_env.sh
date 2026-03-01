@@ -4,7 +4,7 @@ set -euo pipefail
 # Sync proxy env from *current process environment* into /etc/agent-manager.env.
 #
 # Intended usage (on the target machine, after you login and your shell already has proxy vars):
-#   sudo -E /root/telegram-bot/scripts/sync_proxy_to_agent_env.sh
+#   sudo -E /root/codex-node-manager/scripts/sync_proxy_to_agent_env.sh
 #   sudo systemctl restart agent-manager.service
 #
 # Notes:

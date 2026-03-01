@@ -8,7 +8,7 @@ set -euo pipefail
 # 4) restart service (manager handles drain on SIGTERM)
 # 5) health check + short logs
 
-REPO_DIR="${REPO_DIR:-/root/telegram-bot}"
+REPO_DIR="${REPO_DIR:-/root/codex-node-manager}"
 BRANCH="${BRANCH:-main}"
 SERVICE_NAME="${SERVICE_NAME:-agent-manager}"
 GIT_TIMEOUT_S="${GIT_TIMEOUT_S:-60}"

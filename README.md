@@ -5,7 +5,7 @@
 - **manager**：接收 Telegram 消息，选择一个在线 node 下发任务，收回结果后回写 Telegram
 - **node**：运行在每台被控机器上，保持本机 `codex app-server` 常驻，通过 WS 与 manager 双向通信
 
-详细架构见 [ARCHITECTURE.md](/root/telegram-bot/ARCHITECTURE.md)。
+详细架构见 [ARCHITECTURE.md](/root/codex-node-manager/ARCHITECTURE.md)。
 
 ## ASCII 逻辑图
 
@@ -70,7 +70,7 @@ User(TG)      Manager(bot+service)      Manager(ws)          Node         codex 
    |                  | persist routing/thread ptr -> manager_data.db            |
 ```
 
-后续开发者接入指南见 [AGENTS.md](/root/telegram-bot/AGENTS.md)。
+后续开发者接入指南见 [AGENTS.md](/root/codex-node-manager/AGENTS.md)。
 
 ## 文档分工
 
@@ -79,7 +79,7 @@ User(TG)      Manager(bot+service)      Manager(ws)          Node         codex 
 
 ## 文件说明
 
-- [ARCHITECTURE.md](/root/telegram-bot/ARCHITECTURE.md) - 架构与协议说明
+- [ARCHITECTURE.md](/root/codex-node-manager/ARCHITECTURE.md) - 架构与协议说明
 - `codex_manager.py` - Manager（Telegram + WS registry + task dispatch）
 - `codex_node.py` - Node 新入口（等价于 `codex_node.py`）
 - `codex_node.py` - Node（WS client，内部使用本机 `codex app-server`）
@@ -263,7 +263,7 @@ export CODEX_MANAGER_CONTROL_TOKEN=REPLACE_ME
 scripts/verify_phase2_appserver_rpc.sh node27
 ```
 
-阶段 3：Telegram 端到端验证见 [docs/verify_phase3_tg.md](/root/telegram-bot/docs/verify_phase3_tg.md)。
+阶段 3：Telegram 端到端验证见 [docs/verify_phase3_tg.md](/root/codex-node-manager/docs/verify_phase3_tg.md)。
 
 ### 7. 验证链路（TG）
 
@@ -316,11 +316,11 @@ sudo cp systemd/agent-node.env.example /etc/agent-node.env
 sudo editor /etc/agent-node.env
 
 # 每个实例读取自己的配置文件：
-#   /root/telegram-bot/node_config.<instance>.json
+#   /root/codex-node-manager/node_config.<instance>.json
 # 例如 node_config.1.json / node_config.2.json
 #
 # 如果你希望直接复用目标机当前登录 shell 的代理变量（而不是手写 /etc/agent-node.env），可以：
-#   CODEX_AGENT_MANAGER_ENV_FILE=/etc/agent-node.env sudo -E /root/telegram-bot/scripts/sync_proxy_to_agent_env.sh
+#   CODEX_AGENT_MANAGER_ENV_FILE=/etc/agent-node.env sudo -E /root/codex-node-manager/scripts/sync_proxy_to_agent_env.sh
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now agent-node@1.service
@@ -338,7 +338,7 @@ sudo journalctl -u agent-node@1.service -f
    - 很多环境需要设置系统 `HTTP_PROXY/HTTPS_PROXY`
    - 代理策略：只继承系统 `HTTP_PROXY/HTTPS_PROXY/NO_PROXY`
    - 如果你在 `~/.bashrc` 里 export 了代理：systemd 不会自动继承。  
-     手工部署时，执行 `sudo -E /root/telegram-bot/scripts/sync_proxy_to_agent_env.sh` 后重启服务。  
+     手工部署时，执行 `sudo -E /root/codex-node-manager/scripts/sync_proxy_to_agent_env.sh` 后重启服务。  
      Ansible 部署（`ansible/deploy_cloud_huang.yml`）已自动执行该步骤。
    - 如果环境里有 `ALL_PROXY/all_proxy`（尤其是 socks5）：建议清空它（本项目启动脚本会 `unset ALL_PROXY all_proxy`，避免 python-telegram-bot/httpx 走 SOCKS 导致报错）
 2. Manager 看不到在线 node：

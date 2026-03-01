@@ -5,8 +5,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/root/telegram-bot
-ExecStart=/root/telegram-bot/scripts/run_node.sh
+WorkingDirectory=/root/codex-node-manager
+ExecStart=/root/codex-node-manager/scripts/run_node.sh
 Restart=on-failure
 RestartSec=3
 
@@ -15,4 +15,3 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
-

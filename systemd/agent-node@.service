@@ -5,17 +5,17 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/root/telegram-bot
+WorkingDirectory=/root/codex-node-manager
 # Optional: inject system proxy for Codex/app-server without baking it into node_config.*.json.
 # Use scripts/sync_proxy_to_agent_env.sh to sync current shell proxy env into this file:
-#   CODEX_AGENT_MANAGER_ENV_FILE=/etc/agent-node.env sudo -E /root/telegram-bot/scripts/sync_proxy_to_agent_env.sh
+#   CODEX_AGENT_MANAGER_ENV_FILE=/etc/agent-node.env sudo -E /root/codex-node-manager/scripts/sync_proxy_to_agent_env.sh
 EnvironmentFile=-/etc/agent-node.env
 # NOTE: We do not force-unset ALL_PROXY here. Some environments need ALL_PROXY (e.g. SOCKS)
 # for Codex/app-server to reach upstream, especially for WebSocket endpoints.
 # If you need a clean env for this unit, clear it in /etc/agent-node.env explicitly.
 # Each instance reads its own config file:
-#   /root/telegram-bot/node_config.<instance>.json
-ExecStart=/root/telegram-bot/.venv/bin/python /root/telegram-bot/codex_node.py --config /root/telegram-bot/node_config.%i.json
+#   /root/codex-node-manager/node_config.<instance>.json
+ExecStart=/root/codex-node-manager/.venv/bin/python /root/codex-node-manager/codex_node.py --config /root/codex-node-manager/node_config.%i.json
 Restart=on-failure
 RestartSec=3
 

@@ -419,16 +419,16 @@ Gate：
 
 脚本冒烟结论：
 1. 直接冒烟失败案例：`FAIL node not online`
-   - 根因：本地配置中的 `codex_cwd` 指向不存在路径（`/root/telegram-bot`），node 启动即退出。
+   - 根因：本地配置中的 `codex_cwd` 指向不存在路径（`/root/codex-node-manager`），node 启动即退出。
 2. 对照复测：`PASS`
-   - 使用显式正确配置（`codex_cwd=/root/work/telegram-bot`）后，
+   - 使用显式正确配置（`codex_cwd=/root/codex-node-manager`）后，
    - `verify_phase2_appserver_rpc.sh n1` 通过。
    - 记录：`/tmp/script_nodeid_smoke_ok.log`
 
 补充修复（本轮）：
 1. 配置模板修正：
-   - `node_config.example.json` 的 `codex_cwd` 改为 `/root/work/telegram-bot`。
-   - `node_config.void.json` 同步改为 `/root/work/telegram-bot`（用于本地联调一致性）。
+   - `node_config.example.json` 的 `codex_cwd` 改为 `/root/codex-node-manager`。
+   - `node_config.void.json` 同步改为 `/root/codex-node-manager`（用于本地联调一致性）。
 2. phase2 脚本增强：
    - `verify_phase2_ws.sh` / `verify_phase2_appserver_rpc.sh` 增加 `WAIT_ONLINE` 等待上线逻辑，避免 node 刚启动时误判离线。
 3. 启动回归修复：

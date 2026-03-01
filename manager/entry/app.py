@@ -1253,11 +1253,11 @@ def main() -> int:
                             "max_pending": 10,
                             "sandbox": "dangerFullAccess",
                             "approval_policy": "onRequest",
-                            "codex_cwd": "/root/telegram-bot",
+                            "codex_cwd": "/root/codex-node-manager",
                             "codex_bin": "codex",
                         }
                         text_lines.append("")
-                        text_lines.append("node_config.json 模板（复制到 node 机器的 /root/telegram-bot/node_config.json）：")
+                        text_lines.append("node_config.json 模板（复制到 node 机器的 /root/codex-node-manager/node_config.json）：")
                         text_lines.append("```json")
                         text_lines.append(json.dumps(node_tpl, ensure_ascii=False, indent=2))
                         text_lines.append("```")

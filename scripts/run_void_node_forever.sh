@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /root/work/telegram-bot
+cd /root/codex-node-manager
 LOCK=/tmp/void_node_runner.lock
 exec 9>"$LOCK"
 flock -n 9 || exit 0

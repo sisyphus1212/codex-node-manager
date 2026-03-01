@@ -5,9 +5,9 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/root/telegram-bot
+WorkingDirectory=/root/codex-node-manager
 EnvironmentFile=/etc/agent-manager.env
-ExecStart=/root/telegram-bot/scripts/run.sh
+ExecStart=/root/codex-node-manager/scripts/run.sh
 Restart=on-failure
 RestartSec=3
 TimeoutStopSec=90

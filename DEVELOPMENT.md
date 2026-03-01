@@ -2,7 +2,7 @@
 
 本项目包含一个 Codex Manager（Telegram + WS 控制面）和多个 Codex Node（WS 客户端）。Manager 把 Telegram 消息转发给某个在线 Node；每个 Node 管理本机的 `codex app-server`（stdio JSON-RPC），执行任务并把结果回传给 Manager。
 
-建议先阅读 [ARCHITECTURE.md](/root/telegram-bot/ARCHITECTURE.md)。
+建议先阅读 [ARCHITECTURE.md](/root/codex-node-manager/ARCHITECTURE.md)。
 
 ## 快速检查
 
@@ -52,7 +52,7 @@ python codex_manager.py --ws-only --dispatch-node node1 --prompt ping --timeout 
 - `task_assign` -> `task_result`
 - 可选：`heartbeat`
 
-具体 JSON 结构见 [ARCHITECTURE.md](/root/telegram-bot/ARCHITECTURE.md)。
+具体 JSON 结构见 [ARCHITECTURE.md](/root/codex-node-manager/ARCHITECTURE.md)。
 
 ## Security
 
