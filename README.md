@@ -42,8 +42,8 @@
                ▲                                            ▲
                │ ws://CODEX_MANAGER_WS                      │ ws://CODEX_MANAGER_WS
                │                                            │
-┌───────────────────────────────┐               ┌───────────────────────────────┐
-│          Node Host A          │               │          Node Host B          │
+┌───────────────────────────────┐      ...      ┌───────────────────────────────┐
+│          Node Host A          │               │          Node Host N          │
 │  node process (codex_node.py) │               │  node process (codex_node.py) │
 │   - ws_client                 │               │   - ws_client                 │
 │   - task runner (FIFO queue)  │               │   - task runner (FIFO queue)  │
