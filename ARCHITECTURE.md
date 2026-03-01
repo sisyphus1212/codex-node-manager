@@ -19,13 +19,14 @@
 ### 1) 组件与部署
 
 ```text
+                          User (TG App)
+                     send command / receive reply
+                                   │
+                                   ▼
                           Internet / Private Network
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                               Manager Host                                 │
 │                                                                             │
-│  User (TG App)                                                              │
-│      │ send command / receive reply                                        │
-│      ▼                                                                     │
 │  Telegram Cloud (Bot API)                                                   │
 │      │ polling/send                                                        │
 │      ▼                                                                     │
