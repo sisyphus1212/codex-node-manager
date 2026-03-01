@@ -447,3 +447,8 @@ systemctl is-active agent-node@2.service
 journalctl -u agent-manager.service -n 50 --no-pager
 ```
 
+
+## Private Mirror Subproject
+
+- Path: `codex-node-manager-private`
+- Repo: `https://github.com/sisyphus1212/codex-node-manager-private`
