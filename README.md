@@ -356,3 +356,24 @@ sudo journalctl -u agent-node@1.service -f
 ## 多机管理
 
 - `/node` 弹出在线 node 按钮，并显示 current
+
+## Public Config Submodule
+
+The public desensitized config templates are maintained in a submodule:
+
+- Path: `public/config`
+- Repo: `https://github.com/sisyphus1212/codex-node-manager-public-config`
+
+Clone with submodule:
+
+```bash
+git clone --recurse-submodules https://github.com/sisyphus1212/codex-node-manager.git
+cd codex-node-manager
+```
+
+If already cloned:
+
+```bash
+git submodule sync --recursive
+git submodule update --init --recursive
+```
