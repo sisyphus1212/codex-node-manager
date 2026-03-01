@@ -75,3 +75,11 @@ telegram-bot/
 3. `CHANGELOG.md` 维护要求：
 - 重要功能、架构调整、协议修复必须写入 `CHANGELOG.md`
 - 与发布相关的行为变更（升级、超时、消息交付）必须记录
+
+## 7. 发布同步硬约束（必须）
+
+1. 代码发布同步必须走独立 skill：
+- `repo-sync-private-to-public/SKILL.md`
+2. 不允许手工“随意 copy/patch”替代发布流程。
+3. `codex-node-manager` 是交付仓；发布前必须按该 skill 完成脱敏检查。
+4. 配置子项目同步同样必须走该 skill 的“redacted config sync”步骤。
