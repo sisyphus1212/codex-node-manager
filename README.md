@@ -448,7 +448,8 @@ journalctl -u agent-manager.service -n 50 --no-pager
 ```
 
 
-## Private Mirror Subproject
 
-- Path: `codex-node-manager-private`
-- Repo: `https://github.com/sisyphus1212/codex-node-manager-private`
+## Codex Runtime Bundle
+
+- Public repo submodule path: `.codex`
+- Source: `https://github.com/sisyphus1212/codex-node-manager-codex-public`
