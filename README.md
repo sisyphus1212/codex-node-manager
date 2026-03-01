@@ -357,11 +357,11 @@ sudo journalctl -u agent-node@1.service -f
 
 - `/node` 弹出在线 node 按钮，并显示 current
 
-## Public Config Submodule
+## Config Submodule (Template)
 
 The public desensitized config templates are maintained in a submodule:
 
-- Path: `public/config`
+- Path: `private/config`
 - Repo: `https://github.com/sisyphus1212/codex-node-manager-public-config`
 
 Clone with submodule:
@@ -377,3 +377,5 @@ If already cloned:
 git submodule sync --recursive
 git submodule update --init --recursive
 ```
+
+说明：默认子模块指向公开模板仓。你拿走项目后，可把 `private/config` 的远程改成你自己的私有配置仓，再替换为你自己的真实字段。
