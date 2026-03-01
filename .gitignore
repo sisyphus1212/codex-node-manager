@@ -1,0 +1,36 @@
+# Logs
+*.log
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Session data (user specific)
+sessions.json
+manager_data.db
+ansible/secrets.vault.yml
+
+# Manager config (contains Telegram bot token)
+manager_config.json
+
+# Legacy/local files (keep ignored to avoid leaking secrets)
+codex_config.json
+opencode_config.json
+
+# Local proxy config (contains machine-specific endpoints/tokens)
+proxy_config.json
+# New name (prefer)
+node_config.json
+# Multi-instance node configs (systemd agent-node@.service)
+node_config.*.json
+proxy_config.*.json
